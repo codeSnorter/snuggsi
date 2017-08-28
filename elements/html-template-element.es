@@ -11,7 +11,15 @@ const Template = HTMLTemplateElement = function (template) {
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors#Examples
   // https://docs.microsoft.com/en-us/scripting/javascript/reference/object-getownpropertydescriptor-function-javascript
   // NO IE SUPPORT!!!!
-  return Object.assign (template, { bind } )
+  return cloned (template)
+
+  function cloned (template) {
+    this === HTMLTemplateElement
+      && (template = template.cloneNode (true))
+      && (template.hidden = true)
+
+    return Object.assign (template, { bind } )
+  }
 
   function bind (context) {
 
